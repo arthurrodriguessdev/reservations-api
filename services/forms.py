@@ -12,12 +12,13 @@ class ServiceForm(forms.ModelForm):
         price = cleaned_data.get('price')
         duration = cleaned_data.get('duration')
         name = cleaned_data.get('name')
+        pk = cleaned_data.get('pk')
 
         if price and price < 0.0:
             self.add_error('price', 'Insira um valor válido.')
         if duration and duration < 0:
             self.add_error('duration', 'Insira uma duração válida.')
-        if name and Service.objects.filter(name=name).exclude(pk=self.pk):
+        if name and Service.objects.filter(name=name).exclude(pk=pk):
             self.add_error('name', 'Já existe um serviço cadastrado com esse nome.')
 
         return cleaned_data

@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from services.models import Service
+from review.models import Review
 
 
 #Serializer puro, na mão
@@ -11,8 +12,10 @@ from services.models import Service
 
 #Serializer usando model serializer
 class ServiceModelSerializer(serializers.ModelSerializer):
+    average_rating = serializers.SerializerMethodField()
+
     class Meta:
-        fields = '__all__'
+        fields = ('id', 'name', 'duration', 'price', 'description', 'average_rating')
         model = Service
 
     def validate_price(self, value):
@@ -33,3 +36,15 @@ class ServiceModelSerializer(serializers.ModelSerializer):
         if len(value) > 200:
             raise serializers.ValidationError('A descrição do serviço não poode ultrapassar 200 caracteres')
         return value
+
+    def get_average_rating(self, obj):
+        reviews = Review.objects.filter(service=obj)
+        review_quantity = Review.objects.filter(service=obj).count()
+
+        stars = 0
+        if reviews.exists():
+            for rev in reviews:
+                stars += rev.stars
+            return stars / review_quantity
+        else:
+            return 0

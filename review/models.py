@@ -6,7 +6,7 @@ class Review(models.Model):
     stars = models.IntegerField()
     comment = models.TextField(help_text='Deixe um comentário sobre a avaliação')
 
-    def __str__(self):
-        return self.service
+    '''def __str__(self):
+        return self.service'''
 
 

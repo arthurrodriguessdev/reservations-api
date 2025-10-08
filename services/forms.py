@@ -1,4 +1,4 @@
-from django import forms
+'''from django import forms
 from services.models import Service
 
 class ServiceForm(forms.ModelForm):
@@ -32,5 +32,5 @@ class ServiceForm(forms.ModelForm):
 
         if commit:
             instance.save()
-        return instance
+        return instance'''
 

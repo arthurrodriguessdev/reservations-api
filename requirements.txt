@@ -1,8 +1,7 @@
-#Todos os pacotes necessários para a utilização da API
-
 asgiref==3.10.0
 Django==5.2.7
 django-appconf==1.1.0
 django-select2==8.4.1
 djangorestframework==3.16.1
+psycopg2-binary==2.9.10
 sqlparse==0.5.3

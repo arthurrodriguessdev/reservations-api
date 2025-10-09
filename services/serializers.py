@@ -32,13 +32,13 @@ class ServiceModelSerializer(serializers.ModelSerializer):
     
 
     def get_average_rating(self, obj):
-        reviews = Review.objects.filter(service=obj)
-        review_quantity = Review.objects.filter(service=obj).count()
+        reviews = obj.reviews.all()
+        review_quantity = reviews.count()
 
         stars = 0
         if reviews.exists():
             for rev in reviews:
                 stars += rev.stars
-            return stars / review_quantity
+            return round(stars / review_quantity, 1)
         else:
-            return 0
+            return None

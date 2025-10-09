@@ -3,7 +3,7 @@ from django.db import models
 class Service(models.Model):
     name = models.CharField(blank=False, null=False, unique=True)
     price = models.DecimalField(max_digits=8, decimal_places=2, blank=False, null=False)
-    duration = models.PositiveIntegerField(help_text='A duração precisa ser inserida em minutos.')
+    duration = models.IntegerField(help_text='A duração precisa ser inserida em minutos.')
     description = models.TextField(help_text='Breve descrição do serviço.')
 
     def __str__(self):
